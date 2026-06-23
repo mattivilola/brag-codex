@@ -52,6 +52,41 @@ Check Hyperframes before rendering:
 npx hyperframes doctor
 ```
 
+## Test
+
+Run the structural validator:
+
+```bash
+uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/brag
+```
+
+Check the local render toolchain:
+
+```bash
+npx hyperframes doctor
+```
+
+Install the skill into Codex:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+rsync -a --exclude '.DS_Store' skills/brag/ "${CODEX_HOME:-$HOME/.codex}/skills/brag/"
+```
+
+Restart Codex, open any web app project, then ask:
+
+```text
+Use $brag with --duration 15 --tone polished to make a launch video for this project.
+```
+
+Expected result: a `brag-output/` directory containing `brag-plan.md`, `composition-brief.md`, `share-copy.txt`, `composition/`, and, after render approval, `brag.mp4`.
+
+Optional frame analysis: Hyperframes `snapshot --describe` uses `GEMINI_API_KEY` when set. Source your shell profile before testing if needed:
+
+```bash
+source ~/.zshrc
+```
+
 ## What's included
 
 - `skills/brag/` - Codex skill, references, scripts, bundled music, and SFX
@@ -72,4 +107,6 @@ Original credits from upstream:
 
 ## License note
 
-The upstream repository did not include a top-level license file at the commit used for this clone. Before publishing this repository as open source, verify the upstream content and bundled media license terms, then add the intended license and any required third-party notices.
+This Codex adaptation is released under the MIT License. Third-party and upstream-derived content, including bundled media, remains subject to its original rights and license terms.
+
+If this repository includes material that should not be redistributed for IPR or licensing reasons, contact the repository owner on X or GitHub and the material will be removed.
