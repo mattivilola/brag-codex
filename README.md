@@ -49,6 +49,7 @@ The skill writes a `brag-output/` folder with:
 Check Hyperframes before rendering:
 
 ```bash
+npx hyperframes auth login
 npx hyperframes doctor
 ```
 
@@ -63,6 +64,7 @@ uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_
 Check the local render toolchain:
 
 ```bash
+npx hyperframes auth login
 npx hyperframes doctor
 ```
 
