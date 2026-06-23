@@ -1,0 +1,27 @@
+# OS / editor cruft
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+**/.venv/
+.uv-cache/
+
+# Local tooling / machine config
+.playwright-mcp/
+.agents/
+skills-lock.json
+.claude/
+
+# Hyperframes render artifacts + heavy composition sources (never committed)
+**/brag-output*/
+**/renders/
+**/.thumbnails/
+**/.waveform-cache/
+
+# Local Codex packaging experiments
+.codex-plugin/
+CODEX_PLUGIN_FOLLOWUPS.md

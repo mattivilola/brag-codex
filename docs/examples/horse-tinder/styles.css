@@ -1,0 +1,507 @@
+/* ============================================================
+   Horse Tinder: golden-hour, device-forward
+   ============================================================ */
+:root {
+  /* Warm full palette, OKLCH, every neutral tinted to amber */
+  --cream:      oklch(96% 0.018 78);
+  --cream-deep: oklch(92% 0.030 74);
+  --sand:       oklch(86% 0.052 72);
+  --amber:      oklch(73% 0.150 62);
+  --amber-deep: oklch(58% 0.155 50);
+  --ember:      oklch(50% 0.150 42);
+  --clay:       oklch(38% 0.085 46);
+  --bark:       oklch(24% 0.045 48);
+  --ink:        oklch(19% 0.032 50);
+  --rose:       oklch(60% 0.150 16);
+
+  --text:   oklch(22% 0.034 50);
+  --text-2: oklch(42% 0.044 54);
+  --text-3: oklch(56% 0.038 58);
+  --border: oklch(87% 0.034 72);
+
+  /* Spacing */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 36px; --s7: 52px; --s8: 72px;
+  --s9: 104px; --s10: 144px;
+
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --sans:  'Figtree', system-ui, sans-serif;
+
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { border: none; cursor: pointer; font-family: var(--sans); background: none; }
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.9rem, 6.6vw, 5.2rem); }
+h2 { font-size: clamp(2rem, 4.2vw, 3.1rem); }
+h3 { font-size: 1.18rem; letter-spacing: -0.01em; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---- Buttons ---- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  background: var(--amber);
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 15px 34px;
+  border-radius: 100px;
+  box-shadow: 0 10px 30px oklch(58% 0.155 50 / 0.35);
+  transition: background 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.btn-primary:hover { background: oklch(78% 0.150 64); transform: translateY(-2px); }
+.btn-primary:active { transform: translateY(0); }
+
+/* ============================================================
+   Nav
+   ============================================================ */
+.nav {
+  position: absolute;
+  inset-block-start: 0; inset-inline: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s5) clamp(var(--s5), 5vw, var(--s8));
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+.nav-cta {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--cream);
+  padding: 9px 20px;
+  border-radius: 100px;
+  transition: background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--amber); }
+
+/* ============================================================
+   Hero: cinematic golden-hour photo, device as centerpiece
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: var(--s10) clamp(var(--s5), 5vw, var(--s8)) var(--s8);
+  overflow: hidden;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  z-index: 0;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Bright golden-hour wash: warm amber glow up top, a soft readable
+     pocket behind the copy on the left, mostly clear on the right */
+  background:
+    linear-gradient(100deg,
+      oklch(34% 0.07 50 / 0.62) 0%,
+      oklch(46% 0.10 58 / 0.30) 34%,
+      oklch(70% 0.13 68 / 0.05) 64%,
+      transparent 100%),
+    radial-gradient(110% 80% at 72% 14%,
+      oklch(84% 0.15 72 / 0.40), transparent 58%);
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1.05fr auto;
+  gap: clamp(var(--s6), 6vw, var(--s10));
+  align-items: center;
+}
+
+.hero-copy { max-width: 26ch; }
+.hero-copy .eyebrow {
+  color: oklch(94% 0.040 76);
+  margin-bottom: var(--s4);
+  text-shadow: 0 1px 14px oklch(28% 0.06 48 / 0.7);
+}
+.hero-copy h1 {
+  color: var(--cream);
+  margin-bottom: var(--s6);
+  text-shadow: 0 2px 28px oklch(24% 0.06 46 / 0.55);
+}
+.hero-copy h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: oklch(90% 0.110 74);
+}
+
+/* ============================================================
+   Phone device: the hero object
+   ============================================================ */
+.device {
+  position: relative;
+  perspective: 1400px;
+}
+.phone {
+  position: relative;
+  width: clamp(264px, 30vw, 312px);
+  background: var(--ink);
+  border-radius: 46px;
+  padding: 12px;
+  box-shadow:
+    0 2px 0 oklch(40% 0.05 50 / 0.6) inset,
+    0 60px 120px oklch(14% 0.04 46 / 0.55),
+    0 0 0 1.5px oklch(42% 0.05 50 / 0.5);
+  transform: rotate(-2deg);
+  animation: phone-rise 900ms var(--ease-expo) both;
+}
+@keyframes phone-rise {
+  from { opacity: 0; transform: rotate(-2deg) translateY(34px); }
+  to   { opacity: 1; transform: rotate(-2deg) translateY(0); }
+}
+.phone-speaker {
+  position: absolute;
+  top: 24px; left: 50%;
+  transform: translateX(-50%);
+  width: 56px; height: 6px;
+  background: oklch(34% 0.02 50);
+  border-radius: 4px;
+  z-index: 3;
+}
+.phone-screen {
+  position: relative;
+  background: var(--cream);
+  border-radius: 35px;
+  overflow: hidden;
+  padding: var(--s5) var(--s3) var(--s3);
+}
+
+.phone-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 var(--s2) var(--s3);
+}
+.phone-brand {
+  font-family: var(--serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--amber-deep);
+}
+.phone-loc {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0.01em;
+}
+
+/* ---- Swipe card ---- */
+.card {
+  background: oklch(99% 0.008 78);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px oklch(30% 0.05 50 / 0.14);
+  border: 1px solid var(--border);
+}
+.card-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+.card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    oklch(18% 0.04 46 / 0.78) 0%,
+    oklch(18% 0.04 46 / 0.18) 34%,
+    transparent 56%);
+}
+.card-pin {
+  position: absolute;
+  top: var(--s3); right: var(--s3);
+  z-index: 2;
+  background: oklch(98% 0.010 78 / 0.92);
+  color: var(--clay);
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 100px;
+}
+.card-id {
+  position: absolute;
+  left: var(--s4); right: var(--s4); bottom: var(--s4);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.card-name {
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1;
+}
+.card-age { font-family: var(--sans); font-weight: 400; opacity: 0.85; }
+.card-verified {
+  margin-left: auto;
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--amber);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.card-body { padding: var(--s3) var(--s4) var(--s2); }
+.card-bio {
+  font-size: 0.74rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin-bottom: var(--s3);
+}
+.card-tags { display: flex; gap: var(--s1); flex-wrap: wrap; }
+.tag {
+  font-size: 0.6rem;
+  font-weight: 500;
+  background: var(--cream-deep);
+  color: var(--clay);
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--s5);
+  padding: var(--s3) 0 var(--s4);
+}
+.act {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 14px oklch(30% 0.05 50 / 0.16);
+  transition: transform 150ms var(--ease-out);
+}
+.act-pass { background: var(--cream); color: var(--rose); }
+.act-like { background: var(--amber); color: var(--ink); }
+.act:hover { transform: scale(1.1); }
+
+/* ---- Match payoff, floating off the device ---- */
+.match {
+  position: absolute;
+  bottom: -26px; left: -34px;
+  z-index: 4;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 18px;
+  padding: var(--s4) var(--s5);
+  box-shadow: 0 22px 50px oklch(16% 0.04 46 / 0.5);
+  animation: match-pop 600ms 1000ms var(--ease-expo) both;
+}
+.match-kicker {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  color: oklch(82% 0.14 70);
+  line-height: 1;
+}
+.match-sub {
+  font-size: 0.72rem;
+  color: oklch(82% 0.03 72);
+  margin-top: var(--s1);
+}
+@keyframes match-pop {
+  from { opacity: 0; transform: scale(0.7) translateY(14px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================================================
+   Features: three, as a typographic row not a card grid
+   ============================================================ */
+.features {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: var(--s10) clamp(var(--s5), 5vw, var(--s8)) var(--s9);
+}
+.features-title {
+  max-width: 18ch;
+  margin-bottom: var(--s8);
+  color: var(--clay);
+}
+.features-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s7);
+}
+.feature {
+  padding-top: var(--s4);
+  border-top: 2px solid var(--amber);
+}
+.feature h3 { color: var(--text); margin-bottom: var(--s3); }
+.feature p { color: var(--text-2); font-size: 0.95rem; max-width: 30ch; }
+
+/* ============================================================
+   Testimonial: drenched golden band
+   ============================================================ */
+.testimonial {
+  background:
+    radial-gradient(140% 120% at 20% 0%, oklch(78% 0.155 66), transparent 62%),
+    linear-gradient(140deg, var(--amber) 0%, var(--ember) 100%);
+  padding: var(--s10) clamp(var(--s5), 5vw, var(--s8));
+}
+.testimonial figure {
+  max-width: 22ch;
+  margin-inline: auto;
+  text-align: center;
+}
+.quote {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4.4vw, 3.1rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.24;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.quote-attr {
+  margin-top: var(--s6);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: oklch(30% 0.07 44);
+}
+
+/* ============================================================
+   Download
+   ============================================================ */
+.download {
+  text-align: center;
+  padding: var(--s9) clamp(var(--s5), 5vw, var(--s8)) var(--s8);
+}
+.download h2 {
+  color: var(--clay);
+  max-width: 16ch;
+  margin: 0 auto var(--s7);
+}
+.store-badges {
+  display: flex;
+  gap: var(--s4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.store-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  background: var(--ink);
+  color: var(--cream);
+  padding: 13px 26px;
+  border-radius: 14px;
+  min-width: 168px;
+  transition: transform 160ms var(--ease-out), background 160ms;
+}
+.store-badge:hover { transform: translateY(-2px); background: var(--bark); }
+.badge-icon { font-size: 1.5rem; line-height: 1; }
+.badge-text {
+  display: flex; flex-direction: column;
+  font-size: 1.02rem; font-weight: 600; line-height: 1.15;
+  text-align: left;
+}
+.badge-text small { font-size: 0.62rem; font-weight: 400; opacity: 0.7; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  padding: var(--s6) clamp(var(--s5), 5vw, var(--s8));
+  border-top: 1px solid var(--border);
+}
+.footer-logo { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--text); }
+.footer-copy { font-size: 0.82rem; color: var(--text-3); letter-spacing: 0.02em; }
+
+/* ============================================================
+   Motion preference
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .phone, .match { animation: none; }
+  .phone { transform: rotate(-2deg); }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 880px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--s9);
+  }
+  .hero-copy { max-width: 24ch; }
+  .features-row { grid-template-columns: 1fr; gap: var(--s6); }
+  .feature p { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .nav { padding: var(--s4) var(--s5); }
+  .match { left: -16px; bottom: -20px; padding: var(--s3) var(--s4); }
+  .match-kicker { font-size: 1.25rem; }
+  .store-badges { flex-direction: column; align-items: center; }
+}

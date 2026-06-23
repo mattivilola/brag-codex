@@ -1,0 +1,268 @@
+/* ============================================================
+   Psychologists for Chatbots
+   Theme: warm clinical paper. Light, confident, tight.
+   Strategy: Restrained. Warm putty neutrals + one saturated
+   accent: deep clinical cobalt (not teal). Humanist sans.
+   ============================================================ */
+:root {
+  --paper:     oklch(96.5% 0.012 78);   /* warm putty paper */
+  --paper-2:   oklch(93.5% 0.016 76);   /* recessed warm tone */
+  --card:      oklch(98.5% 0.008 80);   /* form surface, warmer than white */
+  --ink:       oklch(26% 0.022 70);     /* warm near-black, tinted to paper */
+  --ink-2:     oklch(44% 0.020 68);     /* secondary text */
+  --ink-3:     oklch(51% 0.016 66);     /* tertiary / labels, kept AA on paper */
+  --line:      oklch(86% 0.018 72);     /* hairline */
+  --line-2:    oklch(80% 0.022 72);     /* stronger hairline */
+
+  --cobalt:    oklch(48% 0.155 258);    /* deep clinical cobalt accent */
+  --cobalt-ink:oklch(40% 0.150 258);    /* darker cobalt for hover */
+  --cobalt-pale:oklch(93% 0.040 258);   /* accent tint fill */
+
+  --measure: 60ch;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --step-1: clamp(2.6rem, 5.2vw, 4.3rem);
+  --step-2: clamp(1.5rem, 2.6vw, 2.15rem);
+  --step-3: 1.2rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+em { font-style: italic; }
+
+h1, h2, h3 { line-height: 1.08; text-wrap: balance; letter-spacing: -0.025em; font-weight: 700; }
+
+/* ---- Masthead ---- */
+.masthead {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  padding: clamp(1.1rem, 2.4vw, 1.6rem) clamp(1.25rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.wordmark span { color: var(--ink-3); font-weight: 500; }
+.license { font-size: 0.82rem; color: var(--ink-2); }
+
+/* ---- Stage: intro + the centerpiece form ---- */
+.stage {
+  max-width: 1080px; margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.intro { max-width: 38ch; }
+.eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--cobalt);
+  margin-bottom: 1.4rem;
+}
+.intro h1 {
+  font-size: var(--step-1);
+  margin-bottom: 1.3rem;
+}
+.lede {
+  font-size: 1.12rem; color: var(--ink-2); line-height: 1.5;
+  max-width: 30ch;
+}
+
+/* ---- Intake form (the hero centerpiece) ---- */
+.intake {
+  background: var(--card);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  box-shadow:
+    0 1px 0 oklch(99.5% 0.006 80 / 0.6) inset,
+    0 18px 50px -22px oklch(40% 0.15 258 / 0.30),
+    0 4px 14px -10px oklch(26% 0.02 70 / 0.4);
+}
+
+.intake-head {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 0.75rem;
+  padding-bottom: 1.1rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.form-id {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--ink-3);
+  border: 1px solid var(--line-2); border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+.intake-head h2 { font-size: 1.18rem; letter-spacing: -0.02em; }
+.form-confidential {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--cobalt);
+}
+
+.field { border: none; margin-bottom: 1.5rem; }
+.field legend {
+  font-size: 0.8rem; font-weight: 600; color: var(--ink-2);
+  margin-bottom: 0.7rem;
+}
+.field legend em { color: var(--ink); font-weight: 700; }
+
+/* chips */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  font-size: 0.82rem; font-weight: 500;
+  padding: 0.42rem 0.85rem; border-radius: 8px;
+  border: 1px solid var(--line-2); color: var(--ink-2);
+  background: var(--paper);
+  transition: border-color 140ms var(--ease), color 140ms var(--ease);
+}
+.chip:hover { border-color: var(--ink-3); }
+.chip.is-selected {
+  background: var(--cobalt); border-color: var(--cobalt);
+  color: var(--paper); font-weight: 600;
+}
+
+/* the feature field: apology slider, pegged to Constantly */
+.field-feature {
+  background: var(--cobalt-pale);
+  border: 1px solid oklch(86% 0.05 258);
+  border-radius: 11px;
+  padding: 1.15rem 1.25rem 1.25rem;
+}
+.field-feature legend {
+  font-size: 0.92rem; color: var(--ink);
+  padding: 0 0.35rem; margin-left: -0.35rem;
+}
+.slider { display: flex; align-items: center; gap: 0.85rem; outline: none; }
+.slider:focus-visible { box-shadow: 0 0 0 3px oklch(48% 0.155 258 / 0.35); border-radius: 8px; }
+.slider-min, .slider-max {
+  font-size: 0.74rem; font-weight: 500; color: var(--ink-3);
+  white-space: nowrap; flex-shrink: 0;
+}
+.slider-max { color: var(--cobalt-ink); font-weight: 700; }
+.slider-track {
+  flex: 1; height: 6px; border-radius: 99px;
+  background: oklch(88% 0.02 258);
+  position: relative;
+}
+.slider-fill {
+  position: absolute; inset-block: 0; inset-inline-start: 0;
+  width: 100%;
+  background: var(--cobalt); border-radius: 99px;
+}
+.slider-thumb {
+  position: absolute; top: 50%; left: 100%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--card); border: 3px solid var(--cobalt);
+  box-shadow: 0 2px 8px -1px oklch(40% 0.15 258 / 0.5);
+}
+.slider-readout {
+  margin-top: 0.85rem; font-size: 0.82rem; color: var(--ink-2);
+  font-weight: 700; letter-spacing: -0.01em;
+}
+.slider-readout span { color: var(--ink-3); font-weight: 500; }
+
+.intake-foot {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding-top: 1.25rem; border-top: 1px solid var(--line);
+}
+.submit {
+  background: var(--cobalt); color: var(--paper);
+  font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em;
+  padding: 0.8rem 1.5rem; border-radius: 9px;
+  transition: background 150ms var(--ease), transform 150ms var(--ease);
+}
+.submit:hover { background: var(--cobalt-ink); transform: translateY(-1px); }
+.submit:active { transform: translateY(0); }
+.foot-note { font-size: 0.78rem; color: var(--ink-3); }
+
+/* ---- Services: tight three-item list ---- */
+.services {
+  max-width: 1080px; margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--line);
+}
+.services h2 {
+  font-size: var(--step-2); margin-bottom: 2rem;
+}
+.service-list {
+  list-style: none;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+.service { max-width: 34ch; }
+.service-num {
+  font-size: 0.78rem; font-weight: 700; color: var(--cobalt);
+  letter-spacing: 0.05em; margin-bottom: 0.7rem;
+}
+.service h3 {
+  font-size: var(--step-3); margin-bottom: 0.55rem;
+}
+.service-line {
+  font-size: 0.92rem; color: var(--ink-2); line-height: 1.5;
+}
+
+/* ---- Testimonial ---- */
+.testimonial {
+  max-width: 1080px; margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--line);
+}
+.testimonial blockquote {
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  font-weight: 500; line-height: 1.15; letter-spacing: -0.03em;
+  color: var(--ink); text-wrap: balance;
+  max-width: 22ch;
+}
+.testimonial figcaption {
+  margin-top: 1.5rem; font-size: 0.85rem; color: var(--ink-2);
+}
+
+/* ---- Footer ---- */
+.footer {
+  border-top: 1px solid var(--line);
+  background: var(--paper-2);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 5vw, 3.5rem);
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.6rem 2rem;
+}
+.footer-mark { font-weight: 700; font-size: 0.95rem; }
+.footer-creds {
+  font-size: 0.8rem; color: var(--ink-2); max-width: 58ch;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 860px) {
+  .stage {
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3rem);
+    align-items: start;
+  }
+  .intro { max-width: var(--measure); }
+  .lede { max-width: 46ch; }
+  .service-list { grid-template-columns: 1fr; gap: 1.75rem; }
+  .service { max-width: var(--measure); }
+}
+@media (max-width: 480px) {
+  .intake-head { grid-template-columns: auto 1fr; }
+  .form-confidential { grid-column: 1 / -1; }
+  .intake-foot { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; scroll-behavior: auto; }
+}

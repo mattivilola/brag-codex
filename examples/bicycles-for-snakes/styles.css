@@ -1,0 +1,464 @@
+/* ============================================================
+   Bicycles for Snakes · BFS-01 Datasheet
+   Engineering datasheet / blueprint, but warm. Cream paper,
+   ink, one confident anodized cyan. Light, punchy, fun.
+   ============================================================ */
+:root {
+  /* warm blueprint cream, hue ~92 paper warmed against cool ink */
+  --paper:    oklch(97.5% 0.018 92);
+  --paper-2:  oklch(95.5% 0.026 90);
+  --ink:      oklch(27% 0.030 250);
+  --ink-2:    oklch(42% 0.028 250);
+  --ink-3:    oklch(50% 0.026 250);
+  --rule:     oklch(85% 0.020 235);
+  --rule-2:   oklch(90% 0.018 90);
+
+  /* anodized accent: confident blueprint cyan */
+  --cyan:     oklch(60% 0.155 233);
+  --cyan-ink: oklch(46% 0.140 235);
+  --cyan-wash: oklch(92% 0.045 233);
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px;
+  --s5:24px; --s6:36px; --s7:56px; --s8:80px; --s9:112px;
+
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --semi:    'Barlow Semi Condensed', sans-serif;
+  --sans:    'Barlow', system-ui, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --gutter: clamp(20px, 5vw, 72px);
+  --maxw: 1180px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  /* faint engineering grid on the page itself */
+  background-image:
+    linear-gradient(var(--rule-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule-2) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+svg { display: block; }
+a { color: inherit; text-decoration: none; }
+
+h1, h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(3.8rem, 9.5vw, 7.5rem); color: var(--ink); }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); }
+
+.kicker {
+  font-family: var(--semi);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan-ink);
+}
+
+/* ---- Masthead: a drawing-sheet title block ---- */
+.masthead {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s5) var(--gutter) var(--s4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s5);
+  border-bottom: 1.5px solid var(--ink);
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: baseline; gap: var(--s3); }
+.brand-mark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.brand-full {
+  font-family: var(--semi);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.doc-meta {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.doc-meta > div {
+  padding: 6px 14px;
+  border-right: 1px solid var(--rule);
+  text-align: center;
+}
+.doc-meta > div:last-child { border-right: none; }
+.doc-meta dt {
+  font-family: var(--semi);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.doc-meta dd {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ---- Hero: text left, big drawing right (asymmetric) ---- */
+.hero {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 60px) var(--gutter) var(--s7);
+  display: grid;
+  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.hero-head { max-width: 30ch; }
+.hero-head h1 { margin: 0 0 var(--s4); }
+.lede {
+  font-size: 1.22rem;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink-2);
+  max-width: 26ch;
+  margin-bottom: var(--s5);
+}
+.hero-head .btn { margin-top: var(--s1); }
+
+/* ---- The drawing (the money shot) ---- */
+.drawing {
+  position: relative;
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  padding: var(--s5) var(--s5) var(--s4);
+  box-shadow: 6px 6px 0 var(--cyan-wash);
+}
+.drawing::after {
+  /* inner registration border */
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
+.drawing-tag {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  font-family: var(--semi);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: var(--s3);
+  margin-bottom: var(--s2);
+  border-bottom: 1px solid var(--rule);
+}
+.drawing-tag span:nth-child(2) { color: var(--cyan-ink); }
+.blueprint-svg { width: 100%; height: auto; overflow: visible; }
+
+/* svg base styling */
+.bp-grid line { stroke: var(--rule); }
+.bp-line { fill: none; stroke: var(--cyan); stroke-width: 2; }
+.bp-frame { stroke-width: 2.6; }
+.bp-stay { stroke-width: 1.6; opacity: 0.7; }
+.bp-rail { fill: none; stroke: var(--cyan-ink); stroke-width: 1.8; }
+.bp-snake { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; }
+.bp-fill { fill: var(--cyan-ink); }
+
+.bp-dim line { stroke: var(--ink-3); stroke-width: 1; }
+.bp-dim text,
+.bp-callout text {
+  font-family: var(--semi);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.bp-callout line { stroke: var(--ink-3); stroke-width: 0.75; }
+.bp-callout text { fill: var(--cyan-ink); font-size: 10px; }
+
+/* line-draw reveal */
+.draw {
+  stroke-dashoffset: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .draw {
+    stroke-dasharray: 1;
+    animation: draw 1.4s var(--ease) forwards;
+  }
+  .bp-snake { animation-delay: 0.5s; }
+  .bp-rail { animation-delay: 0.32s; }
+  .bp-dim .draw, .bp-callout .draw { animation-delay: 0.7s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+}
+/* preserve the intended dashed wheels after the draw completes */
+.bp-line circle[stroke-dasharray="6 5"] { animation-name: draw, restore-6; }
+.bp-line circle[stroke-dasharray="2 6"] { animation-name: draw, restore-2; }
+@keyframes restore-6 { to { stroke-dasharray: 6 5; } }
+@keyframes restore-2 { to { stroke-dasharray: 2 6; } }
+
+/* ---- Callouts (numbered spec notes) ---- */
+.callouts {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--s7);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1.5px solid var(--ink);
+}
+.callout {
+  padding: var(--s5) var(--s5) var(--s5) 0;
+  border-right: 1px solid var(--rule);
+}
+.callout:last-child { border-right: none; padding-right: 0; }
+.callout:not(:first-child) { padding-left: var(--s5); }
+.callout-id {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cyan-ink);
+  letter-spacing: 0.1em;
+}
+.callout-h {
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: var(--s2) 0 var(--s2);
+  line-height: 1;
+}
+.callout-b {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  max-width: 30ch;
+}
+
+/* ---- Section tag header ---- */
+.section-tag {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s4);
+  margin-bottom: var(--s5);
+}
+.section-tag span {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cyan-ink);
+}
+.section-tag h2 { color: var(--ink); }
+
+/* ---- Spec table ---- */
+.specs, .models {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s7) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table tr { border-bottom: 1px solid var(--rule); }
+.spec-table tr:first-child { border-top: 1px solid var(--ink); }
+.spec-table th {
+  text-align: left;
+  font-family: var(--semi);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: var(--s3) var(--s4) var(--s3) 0;
+  width: 34%;
+  vertical-align: baseline;
+}
+.spec-table td {
+  font-family: var(--semi);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: var(--s3) 0;
+}
+
+/* ---- Model comparison table ---- */
+.model-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--semi);
+}
+.model-table th, .model-table td {
+  text-align: left;
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--rule);
+}
+.model-table thead tr { border-bottom: 1.5px solid var(--ink); }
+.model-col {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink);
+  vertical-align: bottom;
+  line-height: 1;
+}
+.model-col span {
+  display: block;
+  font-family: var(--semi);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 5px;
+}
+.model-col.is-lead {
+  color: var(--cyan-ink);
+  background: var(--cyan-wash);
+}
+.model-table tbody th {
+  font-family: var(--semi);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  width: 22%;
+}
+.model-table tbody td {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.model-table tbody td:nth-child(2) { background: var(--cyan-wash); color: var(--cyan-ink); font-weight: 600; }
+.model-table tbody tr:last-child th,
+.model-table tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); }
+
+/* ---- Quote / field note ---- */
+.quote {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s8) var(--gutter);
+}
+.quote blockquote {
+  max-width: 20ch;
+}
+.quote p {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5.8vw, 4.6rem);
+  font-weight: 700;
+  line-height: 0.94;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.quote p::before { content: "“"; color: var(--cyan); }
+.quote p::after { content: "”"; color: var(--cyan); }
+.quote cite {
+  display: block;
+  margin-top: var(--s4);
+  font-family: var(--semi);
+  font-style: normal;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---- Order ---- */
+.order {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s7) var(--gutter);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s6);
+  flex-wrap: wrap;
+}
+.order-text { max-width: 40ch; }
+.kicker-invert { color: oklch(72% 0.15 233); }
+.order h2 { color: var(--paper); margin: var(--s3) 0 var(--s2); }
+.order-text p:last-child { color: oklch(84% 0.012 235); font-size: 0.98rem; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--cyan);
+  padding: 14px 34px;
+  border: 1.5px solid var(--cyan);
+  transition: background 160ms var(--ease), color 160ms var(--ease), transform 160ms var(--ease);
+  white-space: nowrap;
+}
+.btn:hover { background: var(--paper); color: var(--cyan-ink); transform: translateY(-2px); }
+
+/* ---- Colophon ---- */
+.colophon {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s5) var(--gutter) var(--s7);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+  font-family: var(--semi);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 880px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: var(--s5);
+  }
+  .hero-head { max-width: none; }
+  .callouts { grid-template-columns: 1fr; }
+  .callout {
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s4) 0;
+  }
+  .callout:last-child { border-bottom: none; }
+  .callout:not(:first-child) { padding-left: 0; }
+}
+@media (max-width: 620px) {
+  .doc-meta { display: none; }
+  .model-table { font-size: 0.86rem; }
+  .model-table th, .model-table td { padding: var(--s2) var(--s3); }
+  .model-col { font-size: 1.05rem; }
+  .order { flex-direction: column; align-items: flex-start; }
+}

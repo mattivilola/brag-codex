@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brag"
+  short_description: "Create launch videos with Hyperframes"
+  default_prompt: "Use $brag to turn this project into a short launch video."

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taxi for Taxis: when your taxi needs a ride</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#" class="nav-logo">T4T<span class="nav-status" aria-hidden="true"></span></a>
+    <div class="nav-meta">
+      <span class="nav-clock" aria-hidden="true">02:47 LOCAL</span>
+      <a href="#dispatch" class="nav-cta">Dispatch</a>
+    </div>
+  </nav>
+
+  <main class="console">
+
+    <header class="brief">
+      <p class="eyebrow">Cab-to-cab dispatch · live in 12 metros</p>
+      <h1>When your taxi needs a ride.</h1>
+      <p class="brief-lead">We route the nearest cab to your tired cab. Yes, really.</p>
+      <div class="brief-actions">
+        <a href="#dispatch" class="btn-primary">Request pickup</a>
+        <span class="brief-line">No surge for tired vehicles.</span>
+      </div>
+    </header>
+
+    <section class="screen" aria-label="Live dispatch map">
+      <div class="screen-bar">
+        <span class="screen-tag">DISPATCH · LIVE</span>
+        <span class="screen-grid">GRID 7 · MIDTOWN</span>
+      </div>
+
+      <div class="map" aria-hidden="true">
+        <div class="map-grid"></div>
+        <div class="map-glow"></div>
+
+        <span class="zone zone-1">MIDTOWN</span>
+        <span class="zone zone-2">RIVER WARD</span>
+
+        <!-- the recursion: a fresh cab routed to a tired cab -->
+        <svg class="route" viewBox="0 0 600 400" preserveAspectRatio="none">
+          <path class="route-path" d="M 200 320 L 200 200 L 330 200 L 330 112 L 168 112" />
+          <path class="route-trace" d="M 200 320 L 200 200 L 330 200 L 330 112 L 168 112" />
+        </svg>
+
+        <!-- tired cab waiting for pickup -->
+        <div class="cab cab-target" style="left:28%; top:28%;">
+          <span class="cab-emoji">🚕</span>
+          <span class="cab-id">#4821</span>
+        </div>
+
+        <!-- the dispatched cab, en route -->
+        <div class="cab cab-active" style="left:33.3%; top:80%;">
+          <span class="cab-id">#2207</span>
+          <span class="cab-emoji">🚕</span>
+          <span class="cab-pulse" aria-hidden="true"></span>
+        </div>
+
+        <!-- idle units -->
+        <div class="cab cab-idle" style="left:84%; top:24%;"><span class="cab-dot is-idle"></span></div>
+        <div class="cab cab-idle" style="left:13%; top:62%;"><span class="cab-dot is-idle"></span></div>
+
+        <div class="eta-card">
+          <div class="eta-row">
+            <span class="eta-label">ETA</span>
+            <span class="eta-time">3:08</span>
+          </div>
+          <div class="eta-link">
+            <span class="eta-from">🚕 #2207</span>
+            <span class="eta-arrow" aria-hidden="true">picking up</span>
+            <span class="eta-to">🚕 #4821</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-feed" role="presentation">
+        <span class="feed-item">02:47:12 &nbsp; #2207 accepted #4821</span>
+        <span class="feed-item">02:47:09 &nbsp; #4821 requested pickup</span>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="how" id="how">
+    <p class="eyebrow">The flow</p>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h2>Register the fleet</h2>
+        <p>We verify medallions, meter status, and emotional availability.</p>
+      </li>
+      <li class="step">
+        <span class="step-num">02</span>
+        <h2>Request the pickup</h2>
+        <p>Pick the cab that needs a lift. We route the nearest cab to it.</p>
+      </li>
+      <li class="step">
+        <span class="step-num">03</span>
+        <h2>Cab collects cab</h2>
+        <p>Driver confirms. Both vehicles proceed at standard rate.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="testimonial">
+    <blockquote>
+      <p class="quote-text">"I used to drive all night. Now sometimes I get driven."</p>
+      <footer class="quote-attr">
+        <span>Taxi #4821</span>
+        <span class="quote-meta">847 pickups · 4.9 rating · verified member</span>
+      </footer>
+    </blockquote>
+  </section>
+
+  <section class="dispatch" id="dispatch">
+    <p class="eyebrow">Ready to dispatch</p>
+    <h2>Your cabs deserve better.</h2>
+    <p class="dispatch-sub">Emergency pickup for emotionally unavailable sedans. Start with one tired cab.</p>
+    <a href="#" class="btn-primary btn-large">Create fleet account</a>
+    <p class="dispatch-note">First 10 dispatches free. No card required.</p>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">T4T</span>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#dispatch">Dispatch</a>
+      <a href="#">Status</a>
+      <a href="#">Legal</a>
+    </nav>
+    <span class="footer-copy">Taxi for Taxis, Inc.</span>
+  </footer>
+
+</body>
+</html>

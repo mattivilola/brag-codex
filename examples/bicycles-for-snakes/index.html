@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bicycles for Snakes · BFS-01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="brand">
+      <span class="brand-mark">BFS</span>
+      <span class="brand-full">Bicycles for Snakes</span>
+    </div>
+    <dl class="doc-meta">
+      <div><dt>Doc</dt><dd>BFS-01</dd></div>
+      <div><dt>Rev</dt><dd>C</dd></div>
+      <div><dt>Sheet</dt><dd>1 / 1</dd></div>
+    </dl>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-head">
+        <h1 id="hero-title">Two wheels.<br>Zero legs.</h1>
+        <p class="lede">The bicycle finally engineered for snakes.</p>
+        <a href="#order" class="btn">Build to order</a>
+      </div>
+
+      <figure class="drawing" aria-labelledby="drawing-cap">
+        <figcaption class="drawing-tag">
+          <span>FIG. 01</span>
+          <span>BFS-01 FRAME GEOMETRY</span>
+          <span>SCALE 1:8</span>
+        </figcaption>
+        <svg class="blueprint-svg" viewBox="0 0 760 420" role="img" aria-labelledby="drawing-cap" xmlns="http://www.w3.org/2000/svg">
+          <title id="drawing-cap">Blueprint of the BFS-01 frame: two dashed wheels, an extended top rail, a riding snake, and dimension annotations.</title>
+
+          <!-- grid -->
+          <g class="bp-grid" stroke-width="0.5">
+            <line x1="0" y1="84" x2="760" y2="84"/>
+            <line x1="0" y1="168" x2="760" y2="168"/>
+            <line x1="0" y1="252" x2="760" y2="252"/>
+            <line x1="0" y1="336" x2="760" y2="336"/>
+            <line x1="152" y1="0" x2="152" y2="420"/>
+            <line x1="304" y1="0" x2="304" y2="420"/>
+            <line x1="456" y1="0" x2="456" y2="420"/>
+            <line x1="608" y1="0" x2="608" y2="420"/>
+          </g>
+
+          <!-- wheels -->
+          <g class="bp-line">
+            <circle class="draw" cx="160" cy="300" r="96" stroke-dasharray="6 5" pathLength="1"/>
+            <circle class="draw" cx="160" cy="300" r="62" stroke-dasharray="2 6" pathLength="1"/>
+            <circle class="bp-fill" cx="160" cy="300" r="9"/>
+            <circle class="draw" cx="600" cy="300" r="96" stroke-dasharray="6 5" pathLength="1"/>
+            <circle class="draw" cx="600" cy="300" r="62" stroke-dasharray="2 6" pathLength="1"/>
+            <circle class="bp-fill" cx="600" cy="300" r="9"/>
+          </g>
+
+          <!-- frame -->
+          <g class="bp-line bp-frame">
+            <line class="draw" x1="160" y1="300" x2="380" y2="150" pathLength="1"/>
+            <line class="draw" x1="380" y1="150" x2="600" y2="300" pathLength="1"/>
+            <line class="draw" x1="380" y1="150" x2="380" y2="300" pathLength="1"/>
+            <line class="draw" x1="160" y1="300" x2="600" y2="300" pathLength="1"/>
+            <line class="draw bp-stay" x1="280" y1="225" x2="600" y2="300" pathLength="1"/>
+          </g>
+
+          <!-- extended top rail (snake-length saddle) -->
+          <rect class="draw bp-rail" x="190" y="138" width="380" height="14" rx="7" pathLength="1"/>
+
+          <!-- riding snake -->
+          <path class="draw bp-snake" d="M 196 145 Q 244 108 292 145 Q 340 182 388 145 Q 436 108 484 145 Q 532 182 564 150" pathLength="1"/>
+
+          <!-- dimension: hub to hub -->
+          <g class="bp-dim">
+            <line class="draw" x1="160" y1="416" x2="600" y2="416" pathLength="1"/>
+            <line x1="160" y1="406" x2="160" y2="416"/>
+            <line x1="600" y1="406" x2="600" y2="416"/>
+            <text x="380" y="410" text-anchor="middle">HUB-TO-HUB · 200 cm</text>
+          </g>
+
+          <!-- dimension: standover -->
+          <g class="bp-dim">
+            <line class="draw" x1="40" y1="150" x2="40" y2="300" pathLength="1"/>
+            <line x1="32" y1="150" x2="48" y2="150"/>
+            <line x1="32" y1="300" x2="48" y2="300"/>
+            <text x="40" y="232" text-anchor="middle" transform="rotate(-90 40 232)">RISE · 70 cm</text>
+          </g>
+
+          <!-- callouts -->
+          <g class="bp-callout">
+            <circle class="bp-fill" cx="380" cy="150" r="3"/>
+            <line x1="380" y1="150" x2="380" y2="70"/>
+            <text x="380" y="58" text-anchor="middle">A · DECORATIVE HEAD</text>
+
+            <circle class="bp-fill" cx="380" cy="265" r="3"/>
+            <line x1="380" y1="265" x2="470" y2="265"/>
+            <text x="476" y="268">B · NO BOTTOM BRACKET</text>
+
+            <circle class="bp-fill" cx="120" cy="300" r="3"/>
+            <line x1="120" y1="300" x2="120" y2="392"/>
+            <text x="120" y="404" text-anchor="middle">C · 700c</text>
+          </g>
+        </svg>
+      </figure>
+    </section>
+
+    <section class="callouts" aria-label="Platform highlights">
+      <div class="callout">
+        <span class="callout-id">01</span>
+        <p class="callout-h">Zero-pedal drivetrain</p>
+        <p class="callout-b">Gravity does the work. No crank, no chain, no expectations.</p>
+      </div>
+      <div class="callout">
+        <span class="callout-id">02</span>
+        <p class="callout-h">Forkless confidence</p>
+        <p class="callout-b">Balances on body curvature, not grip strength.</p>
+      </div>
+      <div class="callout">
+        <span class="callout-id">03</span>
+        <p class="callout-h">30 cm to 9 m</p>
+        <p class="callout-b">Fits garter snakes through full-grown anacondas.</p>
+      </div>
+    </section>
+
+    <section class="specs" id="specs" aria-labelledby="specs-title">
+      <div class="section-tag">
+        <span>02</span><h2 id="specs-title">Specification</h2>
+      </div>
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Frame</th><td>7075 aluminum, anodized</td></tr>
+          <tr><th scope="row">Drivetrain</th><td>Zero-pedal, gravity-assisted</td></tr>
+          <tr><th scope="row">Gears</th><td>None (optimal)</td></tr>
+          <tr><th scope="row">Bottom bracket</th><td>Removed (not applicable)</td></tr>
+          <tr><th scope="row">Saddle</th><td>Elongated rail, 180 cm span</td></tr>
+          <tr><th scope="row">Handlebar</th><td>Decorative, scale-textured</td></tr>
+          <tr><th scope="row">Braking</th><td>Lateral friction (terrain-dependent)</td></tr>
+          <tr><th scope="row">Warranty</th><td>Lifetime (snake damage excluded)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="models" id="models" aria-labelledby="models-title">
+      <div class="section-tag">
+        <span>03</span><h2 id="models-title">Model line</h2>
+      </div>
+      <table class="model-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="model-col is-lead">BFS-01<span>Slither Standard</span></th>
+            <th scope="col" class="model-col">BFS-02 Pro<span>Performance serpent</span></th>
+            <th scope="col" class="model-col">BFS-03 Trail<span>Off-road</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Length</th><td>100–180 cm</td><td>180–400 cm</td><td>60–120 cm</td></tr>
+          <tr><th scope="row">Wheel</th><td>700c</td><td>29″</td><td>27.5″</td></tr>
+          <tr><th scope="row">Mass</th><td>8.4 kg</td><td>6.8 kg</td><td>10.2 kg</td></tr>
+          <tr><th scope="row">Gears</th><td>None</td><td>Still none</td><td>None</td></tr>
+          <tr><th scope="row">Fits</th><td>Corn snakes, pythons</td><td>Boas, anacondas</td><td>Sand boas, horned lizards</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="quote" aria-label="Field note">
+      <blockquote>
+        <p>I don't understand it, but I feel included.</p>
+        <cite>Greg, snake · verified owner</cite>
+      </blockquote>
+    </section>
+
+    <section class="order" id="order" aria-labelledby="order-title">
+      <div class="order-text">
+        <p class="kicker kicker-invert">Available now</p>
+        <h2 id="order-title">Configure your BFS</h2>
+        <p>Ships in 4 to 6 weeks. Assembly impossible.</p>
+      </div>
+      <a href="#order" class="btn">Build to order</a>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <span>BFS · Bicycles for Snakes, Inc.</span>
+    <span>Limbless mobility, engineered</span>
+    <span>© 2026</span>
+  </footer>
+
+</body>
+</html>

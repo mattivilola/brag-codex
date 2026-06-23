@@ -1,0 +1,11 @@
+# Built demo gallery: ignore everything, then allow only the three slugs the
+# gallery shows (each ships brag.mp4 + a brag.jpg poster + a site.jpg thumbnail).
+examples/*
+!examples/horse-tinder/
+!examples/fish-flight-school/
+!examples/taxi-for-taxis/
+
+# Heavy HyperFrames composition/render sources — never committed
+brag-output*/
+
+.DS_Store

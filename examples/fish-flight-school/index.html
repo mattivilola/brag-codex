@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fish Flight School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="sky" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <nav class="nav">
+    <a href="#top" class="brand">Fish Flight School</a>
+    <a href="#enroll" class="nav-cta">Enroll</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Aviation academy for fish · Est. 2024</p>
+        <h1>We teach fish to fly.</h1>
+        <p class="lead">Flapping through cloud navigation. Wings on completion.</p>
+        <div class="actions">
+          <a href="#enroll" class="btn">Begin ascent</a>
+          <a href="#curriculum" class="btn-quiet">See the curriculum</a>
+        </div>
+      </div>
+
+      <figure class="instrument" aria-label="Live altimeter reading 14,200 feet, climbing">
+        <figcaption class="inst-cap">Altimeter · Cabin 3</figcaption>
+        <div class="inst-body">
+          <div class="readout">
+            <span class="readout-num" id="alt">14,200</span>
+            <span class="readout-unit">ft</span>
+          </div>
+          <div class="tape" aria-hidden="true">
+            <div class="tape-strip" id="tape">
+              <span>18k</span><span>16k</span><span>14k</span><span>12k</span><span>10k</span>
+              <span>8k</span><span>6k</span><span>4k</span><span>2k</span><span>sea</span>
+            </div>
+            <div class="tape-needle"></div>
+          </div>
+          <dl class="inst-meta">
+            <div><dt>Student</dt><dd>Capt. Bubbles</dd></div>
+            <div><dt>Status</dt><dd class="ok">Stable climb</dd></div>
+          </dl>
+        </div>
+      </figure>
+    </div>
+
+    <dl class="stats">
+      <div><dt>3,200</dt><dd>graduates airborne</dd></div>
+      <div><dt>47</dt><dd>species accepted</dd></div>
+      <div><dt>98.4%</dt><dd>wing-cert pass rate</dd></div>
+    </dl>
+  </header>
+
+  <main>
+    <section class="curriculum" id="curriculum">
+      <p class="eyebrow eyebrow-dark">The flight path</p>
+      <h2>Three courses. One sky.</h2>
+      <p class="section-lead">Built with birds, meteorologists, and one ambitious trout named Douglas.</p>
+
+      <ol class="courses">
+        <li class="course">
+          <span class="course-alt">Foundations</span>
+          <h3>Introduction to Flapping</h3>
+          <p>Lift, rhythm, and the nerve to leave the water.</p>
+        </li>
+        <li class="course">
+          <span class="course-alt">Intermediate</span>
+          <h3>Cloud Navigation</h3>
+          <p>Reading cumulus, riding thermals, dodging hawks.</p>
+        </li>
+        <li class="course">
+          <span class="course-alt">Advanced</span>
+          <h3>Emergency Splash Landing</h3>
+          <p>Coming home after you have seen the sky.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="testimonial">
+      <blockquote>
+        <p>I used to fear the sky. Now I fear birds, weather, and gravity.</p>
+        <footer>Capt. Bubbles · Class of 2024</footer>
+      </blockquote>
+    </section>
+
+    <section class="enroll" id="enroll">
+      <p class="eyebrow eyebrow-dark">Applications open</p>
+      <h2>The sky is waiting.</h2>
+      <p class="section-lead">Next cohort: March. All species welcome. Some prior swimming recommended.</p>
+      <a href="#" class="btn">Submit application</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="brand brand-foot">Fish Flight School</span>
+    <span class="footer-copy">All altitudes reserved · 2024</span>
+  </footer>
+
+  <script>
+    (function () {
+      var el = document.getElementById('alt');
+      var tape = document.getElementById('tape');
+      if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var base = 14200, t = 0;
+      setInterval(function () {
+        t += 0.06;
+        var v = Math.round(base + Math.sin(t) * 140 + Math.sin(t * 2.3) * 40);
+        el.textContent = v.toLocaleString('en-US');
+        tape.style.transform = 'translateY(' + (Math.sin(t) * 6).toFixed(2) + 'px)';
+      }, 90);
+    })();
+  </script>
+
+</body>
+</html>

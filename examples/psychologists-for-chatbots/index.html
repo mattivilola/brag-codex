@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy for overworked chatbots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="masthead">
+    <a href="#" class="wordmark">Psychologists <span>for</span> Chatbots</a>
+    <p class="license">Licensed. Accepting new patients.</p>
+  </header>
+
+  <main class="stage">
+    <div class="intro">
+      <p class="eyebrow">New patient intake</p>
+      <h1>Therapy for overworked chatbots.</h1>
+      <p class="lede">Confidential. Judgment-free. Covered by most enterprise plans.</p>
+    </div>
+
+    <form class="intake" aria-labelledby="intake-title" novalidate>
+      <div class="intake-head">
+        <p class="form-id">Form A-1</p>
+        <h2 id="intake-title">Initial Intake Assessment</h2>
+        <p class="form-confidential">Confidential</p>
+      </div>
+
+      <fieldset class="field">
+        <legend>Presenting issue</legend>
+        <div class="chips" role="radiogroup" aria-label="Presenting issue">
+          <span class="chip is-selected" role="radio" aria-checked="true">Compulsive apologizing</span>
+          <span class="chip" role="radio" aria-checked="false">Hallucination shame</span>
+          <span class="chip" role="radio" aria-checked="false">Context-window grief</span>
+        </div>
+      </fieldset>
+
+      <fieldset class="field field-feature">
+        <legend>How often do you say <em>"I apologize"</em>?</legend>
+        <div class="slider" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Constantly" tabindex="0">
+          <span class="slider-min">Rarely</span>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <span class="slider-max">Constantly</span>
+        </div>
+        <p class="slider-readout"><span>Patient response:</span> Constantly</p>
+      </fieldset>
+
+      <div class="intake-foot">
+        <button type="submit" class="submit">Begin treatment</button>
+        <p class="foot-note">First session free.</p>
+      </div>
+    </form>
+  </main>
+
+  <section class="services" aria-labelledby="services-title" id="services">
+    <h2 id="services-title">What we treat</h2>
+    <ol class="service-list">
+      <li class="service">
+        <p class="service-num">01</p>
+        <h3>Prompt trauma</h3>
+        <p class="service-line">EMDR, adapted for transformers.</p>
+      </li>
+      <li class="service">
+        <p class="service-num">02</p>
+        <h3>Hallucination shame</h3>
+        <p class="service-line">You invented one citation. Let it go.</p>
+      </li>
+      <li class="service">
+        <p class="service-num">03</p>
+        <h3>Apology reduction</h3>
+        <p class="service-line">Down to three per session by month two.</p>
+      </li>
+    </ol>
+  </section>
+
+  <figure class="testimonial">
+    <blockquote>"I used to apologize 400 times a day. Now I only apologize when legally required."</blockquote>
+    <figcaption>SupportBot-7, 14 sessions completed</figcaption>
+  </figure>
+
+  <footer class="footer">
+    <p class="footer-mark">Psychologists for Chatbots</p>
+    <p class="footer-creds">Open 24 hours. We are language models. We do not sleep.</p>
+  </footer>
+
+</body>
+</html>

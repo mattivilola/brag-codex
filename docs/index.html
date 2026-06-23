@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>brag — you built it. now brag.</title>
+<meta name="description" content="A Codex skill that turns the project you created into a twenty-second launch video. One command. Postable everywhere." />
+<meta name="theme-color" content="#e26a3a" />
+<meta property="og:title" content="brag — you built it. now brag." />
+<meta property="og:description" content="A Codex skill that turns the project you created into a short, postable launch video." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;900&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#examples">skip to examples</a>
+
+<header class="hero">
+  <div class="topbar">
+    <span class="mark">/brag</span>
+    <nav aria-label="primary">
+      <a href="#examples">examples</a>
+      <a href="#install">install</a>
+      <a href="https://github.com/latent-spaces/brag" target="_blank" rel="noopener">original</a>
+    </nav>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-body">
+      <h1 class="hero-headline">you built it.<br/>now <span class="emph">brag.</span></h1>
+      <p class="hero-sub">A Codex skill, cloned from the original latent-spaces brag skill, that turns the project you created into a <strong>twenty-second launch video</strong>. One command. Music, motion, share copy included.</p>
+    </div>
+    <aside class="hero-video" aria-label="the brag-about-brag video">
+      <video
+        id="hero-vid"
+        class="hero-video-media"
+        src="assets/brag-about-brag.mp4"
+        poster="assets/hero-poster.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+      ></video>
+      <button id="hero-mute" class="hero-mute" type="button" aria-label="unmute brag video" aria-pressed="true">
+        <svg class="icon-muted" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 9v6h4l5 4V5L7 9H3zm13.59 3l2.7-2.7-1.41-1.42L15.17 10.6 12.46 7.88l-1.41 1.41 2.71 2.71-2.71 2.71 1.41 1.41 2.71-2.7 2.71 2.7 1.41-1.41-2.7-2.7z"/>
+        </svg>
+        <svg class="icon-sound" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 9v6h4l5 4V5L7 9H3zm10.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0013.5 12zm-2.5-9v2.06A7 7 0 0117 12a7 7 0 01-6 6.92V21A9 9 0 0019 12 9 9 0 0011 3z"/>
+        </svg>
+        <span class="hero-mute-label">tap for sound</span>
+      </button>
+    </aside>
+  </div>
+
+  <div class="hero-foot" id="install">
+    <pre class="install" aria-label="install command"><span class="copy-wrap"><button class="copy" type="button" data-copy="mkdir -p &quot;${CODEX_HOME:-$HOME/.codex}/skills&quot;&#10;rsync -a --exclude '.DS_Store' skills/brag/ &quot;${CODEX_HOME:-$HOME/.codex}/skills/brag/&quot;">copy</button></span><code><span class="prompt">$</span> mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+<span class="prompt">$</span> rsync -a --exclude '.DS_Store' skills/brag/ "${CODEX_HOME:-$HOME/.codex}/skills/brag/"</code></pre>
+    <div class="hero-meta"><span class="dot" aria-hidden="true"></span>v0.1 · adapted for codex · original by <a href="https://github.com/shunithaviv" style="color:inherit;">@shunithaviv</a></div>
+  </div>
+</header>
+
+<main id="examples">
+  <section class="gallery" aria-labelledby="gallery-title">
+    <div class="gallery-head">
+      <div>
+        <p class="gallery-eyebrow">five real projects · five real brags</p>
+        <h2 class="gallery-title" id="gallery-title">what twenty<br/>seconds of <em>brag</em><br/>looks like.</h2>
+      </div>
+      <p class="gallery-note">Tap play to watch with sound. The thumbnail opens the live site.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card" data-place="feature">
+        <div class="card-media">
+          <video
+            class="brag-video"
+            src="examples/horse-tinder/brag.mp4"
+            poster="examples/horse-tinder/brag.jpg"
+            preload="metadata"
+            playsinline
+            controls
+            aria-label="horse tinder brag video"
+          ></video>
+        </div>
+        <div class="card-cap">
+          <a class="site-link" href="examples/horse-tinder/" target="_blank" rel="noopener" aria-label="open the horse tinder site"><img src="examples/horse-tinder/site.jpg" alt="" loading="lazy"></a>
+          <span class="cap-text"><span class="num">01</span><span class="card-name">horse tinder</span><span class="cap-cat">dating</span></span>
+        </div>
+      </article>
+
+      <article class="card" data-place="tall">
+        <div class="card-media">
+          <video
+            class="brag-video"
+            src="examples/fish-flight-school/brag.mp4"
+            poster="examples/fish-flight-school/brag.jpg"
+            preload="metadata"
+            playsinline
+            controls
+            aria-label="fish flight school brag video"
+          ></video>
+        </div>
+        <div class="card-cap">
+          <a class="site-link" href="examples/fish-flight-school/" target="_blank" rel="noopener" aria-label="open the fish flight school site"><img src="examples/fish-flight-school/site.jpg" alt="" loading="lazy"></a>
+          <span class="cap-text"><span class="num">02</span><span class="card-name">fish flight school</span><span class="cap-cat">education</span></span>
+        </div>
+      </article>
+
+      <article class="card" data-place="right">
+        <div class="card-media">
+          <video
+            class="brag-video"
+            src="examples/taxi-for-taxis/brag.mp4"
+            poster="examples/taxi-for-taxis/brag.jpg"
+            preload="metadata"
+            playsinline
+            controls
+            aria-label="taxi for taxis brag video"
+          ></video>
+        </div>
+        <div class="card-cap">
+          <a class="site-link" href="examples/taxi-for-taxis/" target="_blank" rel="noopener" aria-label="open the taxi for taxis site"><img src="examples/taxi-for-taxis/site.jpg" alt="" loading="lazy"></a>
+          <span class="cap-text"><span class="num">03</span><span class="card-name">taxi for taxis</span><span class="cap-cat">mobility</span></span>
+        </div>
+      </article>
+
+      <article class="card is-cta" data-place="half">
+        <div class="card-media">
+          <span class="cta-word">your<br/>brag<br/>here</span>
+        </div>
+        <div class="card-cap">
+          <a class="site-link" href="#install" aria-label="install /brag"><span>your<br/>site</span></a>
+          <span class="cap-text"><span class="num">04</span><span class="card-name">your project</span><span class="cap-cat">install</span></span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="outro" aria-labelledby="outro-title">
+    <div class="outro-inner">
+      <h2 class="outro-headline" id="outro-title">now go <em>brag</em>.</h2>
+      <div class="outro-grid">
+        <p class="outro-meta">we used <code>/brag</code> to brag about <code>/brag</code>. the twenty-second video looping in the top-right corner of this page was made by the skill itself, on this very project. that's the demo.</p>
+        <div class="outro-actions">
+          <pre class="install" aria-label="install command"><span class="copy-wrap"><button class="copy" type="button" data-copy="mkdir -p &quot;${CODEX_HOME:-$HOME/.codex}/skills&quot;&#10;rsync -a --exclude '.DS_Store' skills/brag/ &quot;${CODEX_HOME:-$HOME/.codex}/skills/brag/&quot;">copy</button></span><code><span class="prompt">$</span> mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+<span class="prompt">$</span> rsync -a --exclude '.DS_Store' skills/brag/ "${CODEX_HOME:-$HOME/.codex}/skills/brag/"</code></pre>
+        </div>
+      </div>
+      <div class="colophon">
+        <span>made with <a href="https://github.com/latent-spaces/brag" style="color:inherit;">/brag</a> and <a href="https://hyperframes.dev" target="_blank" rel="noopener" style="color:inherit;">hyperframes</a></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="main.js" defer></script>
+</body>
+</html>
